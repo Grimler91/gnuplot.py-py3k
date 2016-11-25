@@ -16,7 +16,7 @@ points and tabulate the output to be used with Gnuplot.
 
 import numpy
 
-import Gnuplot, utils
+from gnuplot import gnuplot, utils, PlotItems
 
 
 def tabulate_function(f, xvals, yvals=None, dtype=None, ufunc=0):
@@ -129,7 +129,7 @@ def compute_Data(xvals, f, ufunc=0, **keyw):
     # evaluate function:
     data = tabulate_function(f, xvals, ufunc=ufunc)
 
-    return Gnuplot.Data(xvals, data, **keyw)
+    return PlotItems.Data(xvals, data, **keyw)
 
 
 def compute_GridData(xvals, yvals, f, ufunc=0, **keyw):
@@ -175,7 +175,7 @@ def compute_GridData(xvals, yvals, f, ufunc=0, **keyw):
     # evaluate function:
     data = tabulate_function(f, xvals, yvals, ufunc=ufunc)
 
-    return Gnuplot.GridData(data, xvals, yvals, **keyw)
+    return PlotItems.GridData(data, xvals, yvals, **keyw)
 
 
 # For backwards compatibility:

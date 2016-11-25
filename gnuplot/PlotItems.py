@@ -20,7 +20,7 @@ from io import StringIO
 
 import numpy
 
-import gp, utils, Errors
+from gnuplot import gp, utils, Errors
 
 
 class _unset:

@@ -1,3 +1,6 @@
-/__pycache__/
+/_pycache__/
+/gnuplot/__pycache__/
 /build/
+/dist/
+/gnuplot_py.egg-info/
 /.directory

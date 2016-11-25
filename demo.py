@@ -16,7 +16,7 @@ the Gnuplot package, see test.py.
 from numpy import *
 
 # If the package has been installed correctly, this should work:
-import Gnuplot, Gnuplot.funcutils
+import gnuplot, gnuplot.funcutils
 
 
 def demo():
@@ -25,7 +25,7 @@ def demo():
     # A straightforward use of gnuplot.  The `debug=1' switch is used
     # in these examples so that the commands that are sent to gnuplot
     # are also output on stderr.
-    g = Gnuplot.Gnuplot(debug=1)
+    g = gnuplot.Gnuplot(debug=1)
     g.title('A simple example') # (optional)
     g('set style data linespoints') # give gnuplot an arbitrary command
     # Plot a list of (x, y) pairs (tuples or a numpy array would
@@ -42,14 +42,14 @@ def demo():
     # is convenient if the same dataset has to be plotted multiple
     # times.  It is also more efficient because the data need only be
     # written to a temporary file once.
-    d = Gnuplot.Data(x, y1,
+    d = gnuplot.Data(x, y1,
                      title='calculated by python',
                      with_='points 3 3')
     g.title('Data can be computed by python or gnuplot')
     g.xlabel('x')
     g.ylabel('x squared')
     # Plot a function alongside the Data PlotItem defined above:
-    g.plot(Gnuplot.Func('x**2', title='calculated by gnuplot'), d)
+    g.plot(gnuplot.Func('x**2', title='calculated by gnuplot'), d)
     input('Please press return to continue...\n')
 
     # Save what we just plotted as a color postscript file.
@@ -88,7 +88,7 @@ def demo():
     # disable binary because older versions of gnuplot don't allow
     # binary data.  Change this to `binary=1' (or omit the binary
     # option) to get the advantage of binary format.
-    g.splot(Gnuplot.GridData(m,x,y, binary=0))
+    g.splot(gnuplot.GridData(m,x,y, binary=0))
     input('Please press return to continue...\n')
 
     # plot another function, but letting GridFunc tabulate its values
@@ -96,7 +96,7 @@ def demo():
     def f(x,y):
         return 1.0 / (1 + 0.01 * x**2 + 0.5 * y**2)
 
-    g.splot(Gnuplot.funcutils.compute_GridData(x,y, f, binary=0))
+    g.splot(gnuplot.funcutils.compute_GridData(x,y, f, binary=0))
     input('Please press return to continue...\n')
 
     # Explicit delete shouldn't be necessary, but if you are having

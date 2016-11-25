@@ -155,22 +155,13 @@ Bugs:
     fails, which can leave temporary files around.
 
 """
-import os, sys
-sys.path.append(os.path.dirname(__file__))
 
 __version__ = '1.8'
 
 # Other modules that should be loaded for 'from Gnuplot import *':
 __all__ = ['utils', 'funcutils', ]
 
-from gp import GnuplotOpts, GnuplotProcess, test_persist
-from Errors import Error, OptionError, DataError
-from PlotItems import PlotItem, Func, File, Data, GridData
-from _Gnuplot import Gnuplot
-
-
-if __name__ == '__main__':
-    import demo
-    demo.demo()
-
-
+from gnuplot.gp import GnuplotOpts, GnuplotProcess, test_persist
+from gnuplot.Errors import Error, OptionError, DataError
+from gnuplot.PlotItems import PlotItem, Func, File, Data, GridData
+from gnuplot.gnuplot import Gnuplot

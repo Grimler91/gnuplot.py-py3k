@@ -29,7 +29,7 @@ keyword arguments and build the 'set terminal' command.
 
 import types
 
-import gp, Errors
+from gnuplot import gp, Errors
 
 
 class Arg:

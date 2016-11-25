@@ -17,16 +17,16 @@ thorough test of many combinations of Gnuplot.py features.
 import os, time, math, tempfile
 import numpy
 
-try:
-    import Gnuplot, Gnuplot.PlotItems, Gnuplot.funcutils
-except ImportError:
-    # kludge in case Gnuplot hasn't been installed as a module yet:
-    import __init__
-    Gnuplot = __init__
-    import PlotItems
-    Gnuplot.PlotItems = PlotItems
-    import funcutils
-    Gnuplot.funcutils = funcutils
+#try:
+import gnuplot, gnuplot.PlotItems, gnuplot.funcutils
+#except ImportError:
+#    # kludge in case Gnuplot hasn't been installed as a module yet:
+#    import __init__
+#    Gnuplot = __init__
+#    import PlotItems
+#    Gnuplot.PlotItems = PlotItems
+#    import funcutils
+#    Gnuplot.funcutils = funcutils
 
 
 def wait(str=None, prompt='Press return to show results...\n'):
@@ -45,7 +45,7 @@ def main():
         )
 
     wait('Popping up a blank gnuplot window on your screen.')
-    g = Gnuplot.Gnuplot(debug=1)
+    g = gnuplot.Gnuplot(debug=1)
     g.clear()
 
     # Make two temporary files:
@@ -64,7 +64,7 @@ def main():
 
         print ('############### test Func ###################################')
         wait('Plot a gnuplot-generated function')
-        g.plot(Gnuplot.Func('sin(x)'))
+        g.plot(gnuplot.Func('sin(x)'))
 
         wait('Set title and axis labels and try replot()')
         g.title('Title')
@@ -73,16 +73,16 @@ def main():
         g.replot()
 
         wait('Style linespoints')
-        g.plot(Gnuplot.Func('sin(x)', with_='linespoints'))
+        g.plot(gnuplot.Func('sin(x)', with_='linespoints'))
         wait('title=None')
-        g.plot(Gnuplot.Func('sin(x)', title=None))
+        g.plot(gnuplot.Func('sin(x)', title=None))
         wait('title="Sine of x"')
-        g.plot(Gnuplot.Func('sin(x)', title='Sine of x'))
+        g.plot(gnuplot.Func('sin(x)', title='Sine of x'))
         wait('axes=x2y2')
-        g.plot(Gnuplot.Func('sin(x)', axes='x2y2', title='Sine of x'))
+        g.plot(gnuplot.Func('sin(x)', axes='x2y2', title='Sine of x'))
 
         print ('Change Func attributes after construction:')
-        f = Gnuplot.Func('sin(x)')
+        f = gnuplot.Func('sin(x)')
         wait('Original')
         g.plot(f)
         wait('Style linespoints')
@@ -100,33 +100,33 @@ def main():
 
         print ('############### test File ###################################')
         wait('Generate a File from a filename')
-        g.plot(Gnuplot.File(filename1))
+        g.plot(gnuplot.File(filename1))
 
         wait('Style lines')
-        g.plot(Gnuplot.File(filename1, with_='lines'))
+        g.plot(gnuplot.File(filename1, with_='lines'))
 
         wait('using=1, using=(1,)')
-        g.plot(Gnuplot.File(filename1, using=1, with_='lines'),
-               Gnuplot.File(filename1, using=(1,), with_='points'))
+        g.plot(gnuplot.File(filename1, using=1, with_='lines'),
+               gnuplot.File(filename1, using=(1,), with_='points'))
         wait('using=(1,2), using="1:3"')
-        g.plot(Gnuplot.File(filename1, using=(1,2)),
-               Gnuplot.File(filename1, using='1:3'))
+        g.plot(gnuplot.File(filename1, using=(1,2)),
+               gnuplot.File(filename1, using='1:3'))
 
         wait('every=5, every=(5,)')
-        g.plot(Gnuplot.File(filename1, every=5, with_='lines'),
-               Gnuplot.File(filename1, every=(5,), with_='points'))
+        g.plot(gnuplot.File(filename1, every=5, with_='lines'),
+               gnuplot.File(filename1, every=(5,), with_='points'))
         wait('every=(10,None,0), every="10::5"')
-        g.plot(Gnuplot.File(filename1, with_='lines'),
-               Gnuplot.File(filename1, every=(10,None,0)),
-               Gnuplot.File(filename1, every='10::5'))
+        g.plot(gnuplot.File(filename1, with_='lines'),
+               gnuplot.File(filename1, every=(10,None,0)),
+               gnuplot.File(filename1, every='10::5'))
 
         wait('title=None')
-        g.plot(Gnuplot.File(filename1, title=None))
+        g.plot(gnuplot.File(filename1, title=None))
         wait('title="title"')
-        g.plot(Gnuplot.File(filename1, title='title'))
+        g.plot(gnuplot.File(filename1, title='title'))
 
         print ('Change File attributes after construction:')
-        f = Gnuplot.File(filename1)
+        f = gnuplot.File(filename1)
         wait('Original')
         g.plot(f)
         wait('Style linespoints')
@@ -146,66 +146,66 @@ def main():
         d = numpy.transpose((x,y1,y2))
 
         wait('Plot Data against its index')
-        g.plot(Gnuplot.Data(y2, inline=0))
+        g.plot(gnuplot.Data(y2, inline=0))
 
         wait('Plot Data, specified column-by-column')
-        g.plot(Gnuplot.Data(x,y2, inline=0))
+        g.plot(gnuplot.Data(x,y2, inline=0))
         wait('Same thing, saved to a file')
-        Gnuplot.Data(x,y2, inline=0, filename=filename1)
-        g.plot(Gnuplot.File(filename1))
+        gnuplot.Data(x,y2, inline=0, filename=filename1)
+        g.plot(gnuplot.File(filename1))
         wait('Same thing, inline data')
-        g.plot(Gnuplot.Data(x,y2, inline=1))
+        g.plot(gnuplot.Data(x,y2, inline=1))
 
         wait('Plot Data, specified by an array')
-        g.plot(Gnuplot.Data(d, inline=0))
+        g.plot(gnuplot.Data(d, inline=0))
         wait('Same thing, saved to a file')
-        Gnuplot.Data(d, inline=0, filename=filename1)
-        g.plot(Gnuplot.File(filename1))
+        gnuplot.Data(d, inline=0, filename=filename1)
+        g.plot(gnuplot.File(filename1))
         wait('Same thing, inline data')
-        g.plot(Gnuplot.Data(d, inline=1))
+        g.plot(gnuplot.Data(d, inline=1))
         wait('with_="lp 4 4"')
-        g.plot(Gnuplot.Data(d, with_='lp 4 4'))
+        g.plot(gnuplot.Data(d, with_='lp 4 4'))
         wait('cols=0')
-        g.plot(Gnuplot.Data(d, cols=0))
+        g.plot(gnuplot.Data(d, cols=0))
         wait('cols=(0,1), cols=(0,2)')
-        g.plot(Gnuplot.Data(d, cols=(0,1), inline=0),
-               Gnuplot.Data(d, cols=(0,2), inline=0))
+        g.plot(gnuplot.Data(d, cols=(0,1), inline=0),
+               gnuplot.Data(d, cols=(0,2), inline=0))
         wait('Same thing, saved to files')
-        Gnuplot.Data(d, cols=(0,1), inline=0, filename=filename1)
-        Gnuplot.Data(d, cols=(0,2), inline=0, filename=filename2)
-        g.plot(Gnuplot.File(filename1), Gnuplot.File(filename2))
+        gnuplot.Data(d, cols=(0,1), inline=0, filename=filename1)
+        gnuplot.Data(d, cols=(0,2), inline=0, filename=filename2)
+        g.plot(gnuplot.File(filename1), gnuplot.File(filename2))
         wait('Same thing, inline data')
-        g.plot(Gnuplot.Data(d, cols=(0,1), inline=1),
-               Gnuplot.Data(d, cols=(0,2), inline=1))
+        g.plot(gnuplot.Data(d, cols=(0,1), inline=1),
+               gnuplot.Data(d, cols=(0,2), inline=1))
         wait('Change title and replot()')
         g.title('New title')
         g.replot()
         wait('title=None')
-        g.plot(Gnuplot.Data(d, title=None))
+        g.plot(gnuplot.Data(d, title=None))
         wait('title="Cosine of x"')
-        g.plot(Gnuplot.Data(d, title='Cosine of x'))
+        g.plot(gnuplot.Data(d, title='Cosine of x'))
 
         print ('############### test compute_Data ###########################')
         x = numpy.arange(100)/5. - 10.
 
         wait('Plot Data, computed by Gnuplot.py')
         g.plot(
-            Gnuplot.funcutils.compute_Data(x, lambda x: math.cos(x), inline=0)
+            gnuplot.funcutils.compute_Data(x, lambda x: math.cos(x), inline=0)
             )
         wait('Same thing, saved to a file')
-        Gnuplot.funcutils.compute_Data(
+        gnuplot.funcutils.compute_Data(
             x, lambda x: math.cos(x), inline=0, filename=filename1
             )
-        g.plot(Gnuplot.File(filename1))
+        g.plot(gnuplot.File(filename1))
         wait('Same thing, inline data')
-        g.plot(Gnuplot.funcutils.compute_Data(x, math.cos, inline=1))
+        g.plot(gnuplot.funcutils.compute_Data(x, math.cos, inline=1))
         wait('with_="lp 4 4"')
-        g.plot(Gnuplot.funcutils.compute_Data(x, math.cos, with_='lp 4 4'))
+        g.plot(gnuplot.funcutils.compute_Data(x, math.cos, with_='lp 4 4'))
 
         print ('############### test hardcopy ###############################')
         print ('******** Generating postscript file "gp_test.ps" ********')
         wait()
-        g.plot(Gnuplot.Func('cos(0.5*x*x)', with_='linespoints 2 2',
+        g.plot(gnuplot.Func('cos(0.5*x*x)', with_='linespoints 2 2',
                        title='cos(0.5*x^2)'))
         g.hardcopy('gp_test.ps')
 
@@ -245,7 +245,7 @@ def main():
 
         print ('******** Generating svg file "gp_test.svg" ********')
         wait()
-        g.plot(Gnuplot.Func('cos(0.5*x*x)', with_='linespoints 2 2',
+        g.plot(gnuplot.Func('cos(0.5*x*x)', with_='linespoints 2 2',
                        title='cos(0.5*x^2)'))
         g.hardcopy('gp_test.svg', terminal='svg')
 
@@ -259,12 +259,12 @@ def main():
 
         print ('############### test splot ##################################')
         wait('a 3-d curve')
-        g.splot(Gnuplot.Data(d, with_='linesp', inline=0))
+        g.splot(gnuplot.Data(d, with_='linesp', inline=0))
         wait('Same thing, saved to a file')
-        Gnuplot.Data(d, inline=0, filename=filename1)
-        g.splot(Gnuplot.File(filename1, with_='linesp'))
+        gnuplot.Data(d, inline=0, filename=filename1)
+        g.splot(gnuplot.File(filename1, with_='linesp'))
         wait('Same thing, inline data')
-        g.splot(Gnuplot.Data(d, with_='linesp', inline=1))
+        g.splot(gnuplot.Data(d, with_='linesp', inline=1))
 
         print ('############### test GridData and compute_GridData ##########')
         # set up x and y values at which the function will be tabulated:
@@ -283,40 +283,40 @@ def main():
         g('set contour base')
         g.xlabel('x')
         g.ylabel('y')
-        g.splot(Gnuplot.GridData(m,x,y, binary=0, inline=0))
+        g.splot(gnuplot.GridData(m,x,y, binary=0, inline=0))
         wait('Same thing, saved to a file')
-        Gnuplot.GridData(m,x,y, binary=0, inline=0, filename=filename1)
-        g.splot(Gnuplot.File(filename1, binary=0))
+        gnuplot.GridData(m,x,y, binary=0, inline=0, filename=filename1)
+        g.splot(gnuplot.File(filename1, binary=0))
         wait('Same thing, inline data')
-        g.splot(Gnuplot.GridData(m,x,y, binary=0, inline=1))
+        g.splot(gnuplot.GridData(m,x,y, binary=0, inline=1))
 
         wait('The same thing using binary mode')
-        g.splot(Gnuplot.GridData(m,x,y, binary=1))
+        g.splot(gnuplot.GridData(m,x,y, binary=1))
         wait('Same thing, using binary mode and an intermediate file')
-        Gnuplot.GridData(m,x,y, binary=1, filename=filename1)
-        g.splot(Gnuplot.File(filename1, binary=1))
+        gnuplot.GridData(m,x,y, binary=1, filename=filename1)
+        g.splot(gnuplot.File(filename1, binary=1))
 
         wait('The same thing using compute_GridData to tabulate function')
-        g.splot(Gnuplot.funcutils.compute_GridData(
+        g.splot(gnuplot.funcutils.compute_GridData(
             x,y, lambda x,y: math.sin(x) + 0.1*x - y**2,
             ))
         wait('Same thing, with an intermediate file')
-        Gnuplot.funcutils.compute_GridData(
+        gnuplot.funcutils.compute_GridData(
             x,y, lambda x,y: math.sin(x) + 0.1*x - y**2,
             filename=filename1)
-        g.splot(Gnuplot.File(filename1, binary=1))
+        g.splot(gnuplot.File(filename1, binary=1))
 
         wait('Use compute_GridData in ufunc and binary mode')
-        g.splot(Gnuplot.funcutils.compute_GridData(
+        g.splot(gnuplot.funcutils.compute_GridData(
             x,y, lambda x,y: numpy.sin(x) + 0.1*x - y**2,
             ufunc=1, binary=1,
             ))
         wait('Same thing, with an intermediate file')
-        Gnuplot.funcutils.compute_GridData(
+        gnuplot.funcutils.compute_GridData(
             x,y, lambda x,y: numpy.sin(x) + 0.1*x - y**2,
             ufunc=1, binary=1,
             filename=filename1)
-        g.splot(Gnuplot.File(filename1, binary=1))
+        g.splot(gnuplot.File(filename1, binary=1))
 
         wait('And now rotate it a bit')
         for view in range(35,70,5):

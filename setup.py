@@ -9,10 +9,7 @@
 
 """
 
-from distutils.core import setup
-
-# Get the version number from the __init__ file:
-from __init__ import __version__
+from setuptools import setup, find_packages
 
 long_description = """\
 Gnuplot.py is a Python package that allows you to create graphs from
@@ -22,7 +19,7 @@ within Python using the gnuplot plotting program.
 setup (
       # Distribution meta-data
       name='gnuplot-py',
-      version=__version__,
+      version='1.8',
       description='A Python interface to the gnuplot plotting program.',
       long_description=long_description,
       author='Michael Haggerty',
@@ -31,6 +28,7 @@ setup (
       license='LGPL',
       # Description of the package in the distribution
       package_dir={'Gnuplot' : '.'},
-      packages=['Gnuplot'],
+      #packages=['Gnuplot'],
+      packages = ['gnuplot'],
      )
 

@@ -14,7 +14,7 @@ interface to a running gnuplot process.
 
 import sys, string, types
 
-import gp, PlotItems, termdefs, Errors
+from gnuplot import gp, PlotItems, termdefs, Errors
 
 
 class _GnuplotFile:
