@@ -384,6 +384,7 @@ terminal_opts['postscript'] = [
         ),
     StringArg(argname='fontname'),
     BareStringArg(argname='fontsize'),
+    BareStringArg(argname='size', fixedword='size'),
     ]
 
 terminal_opts['pdf'] = [
@@ -399,6 +400,7 @@ terminal_opts['pdf'] = [
         ),
     StringArg(argname='fontname'),
     BareStringArg(argname='fontsize'),
+    BareStringArg(argname='size', fixedword='size'),
     ]
 
 terminal_opts['png'] = [
