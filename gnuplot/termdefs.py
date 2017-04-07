@@ -406,8 +406,7 @@ terminal_opts['pdf'] = [
         options=['defaultplex', 'simplex', 'duplex'],
         argname='duplexing',
         ),
-    StringArg(argname='fontname'),
-    BareStringArg(argname='fontsize'),
+    StringArg(argname='font', fixedword='font'),
     BareStringArg(argname='size', fixedword='size'),
     ]
 
