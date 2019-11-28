@@ -9,7 +9,7 @@
 
 """
 
-import Errors
+from gnuplot import Errors
 
 # ############ Configuration variables: ################################
 
