@@ -26,18 +26,17 @@ class GnuplotOpts:
 
     """
 
-    # Command to start up the gnuplot program.  Note that on windows
-    # the main gnuplot program cannot be used directly because it can
-    # not read commands from standard input.  See README for more
-    # information.
+    # Command to start up the gnuplot program.  If your version of
+    # gnuplot is run otherwise, specify the correct command here.  You
+    # could also specify a full path or append command-line options
+    # here if you wish.
     #
-    # If pgnuplot is in a subdirectory with spaces in its name, extra
-    # quoting is required for windows for it to launch gnuplot.
-    # Moreover, any backslashes in the filename have to be escaped by
-    # writing them as "\\".  Example:
+    # If you do not want to use cygwin's gnuplot binary you can specify
+    # the full path to the program to use here, with backslashes escaped.
+    # Example:
     #
     #     gnuplot_command = '"C:\\Program Files\\gp371w32\\pgnuplot.exe"'
-    gnuplot_command = 'pgnuplot.exe'
+    gnuplot_command = 'gnuplot'
 
     # The '-persist' option is not supported on windows:
     recognizes_persist = 0
